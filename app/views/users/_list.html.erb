@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<h2>User info</h2>
+			<%= attachment_image_tag user, :profile_image, fallback: "no_image.png", size: "200x200" %>
+			<table class="table table-striped">
+			 <tbody>
+				<tr>
+			     <td>name</td>
+			     <td> <%= user.name %></td>
+		       </tr>
+		       <tr>
+			    <td>introduction</td>
+			    <td><%= user.introduction %></td>
+			   </tr>
+			</tbody>
+		</table>
+
+				<p><%= link_to (edit_user_path(user)), class: 'btn btn-default btn-lg btn-block' do %>
+					<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+					<% end %>
+				</p>
+			<h2>New book</h2>
+			<%= form_for(book_new, url: books_path) do |f| %>
+			<% if book_new.errors.any? %>
+			<h2><%= book_new.errors.count %>error</h2>
+			<% book_new.errors.full_messages.each do |message| %>
+			<%= message %>
+			 <% end %>
+			<% end %>
+			<h3>Title</h3>
+			<%= f.text_field :title, class: "form" %>
+			<h3>opinion</h3>
+			<%= f.text_area :body, class: "form" %>
+			<div class="button">
+			<%= f.submit "Create Book", class: "btn btn-primary btn-lg btn-block" %>
+		   </div>
+    <% end %>
+</div>

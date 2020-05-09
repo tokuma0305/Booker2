@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Booker2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+
+      <div class="row"  style="background-color: black;">
+        <div class="col-lg-2">
+          <h1 class="title">Bookers</h1>
+        </div>
+        <div class="col-lg-6"></div>
+        <div class="col-lg-4">
+          <% if user_signed_in? %>
+          <div class="list-inline">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+             <%= link_to "Home",user_path(current_user.id)  %>
+          </div>
+          <div class="list-inline">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <%= link_to "Users",users_path %>
+          </div>
+          <div class="list-inline">
+            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+            <%= link_to "Books",books_path %>
+          </div>
+          <div class="list-inline">
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            <%= link_to "logout", destroy_user_session_path, method: :delete %>
+          </div>
+          <% else %>
+              <div class="list-inline">
+                  <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                  <%= link_to "Home", "/" %>
+              </div>
+                <div class="list-inline">
+                  <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                  <%= link_to "About", "/home/about" %>
+                </div>
+                <div class="list-inline">
+                  <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
+                  <%= link_to "sign up", new_user_registration_path %>
+                </div>
+                <div class="list-inline">
+                  <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                  <%= link_to "login", new_user_session_path %>
+                </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+        <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
